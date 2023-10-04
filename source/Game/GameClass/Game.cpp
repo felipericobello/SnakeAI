@@ -43,9 +43,8 @@ namespace snake
 		{
 			float* randomFruit = grid->randomGridPosition();
 			float newFruitPos[2] = {randomFruit[0], randomFruit[1]};
-			std::cout << newFruitPos[0] << ", " << newFruitPos[1] << '\n';
 
-			/* PROBLEMA NO JOGO: A FRUTINHA PODE SPAWNAR NA COBRA
+			/*PROBLEMA NO JOGO : A FRUTINHA PODE SPAWNAR NA COBRA*/
 			bool checkingCollision = true;
 			bool isColliding = false;
 			while (checkingCollision)
@@ -54,24 +53,31 @@ namespace snake
 				{
 					float* indexTailPos = player->tailVector[index]->GetTailPosition();
 
-					if (indexTailPos[0] == newFruitPos[0] and indexTailPos[1] == newFruitPos[1]) { isColliding = true; }
+					if (indexTailPos[0] == newFruitPos[0] and indexTailPos[1] == newFruitPos[1])
+					{ 
+						isColliding = true;
+						break;
+					}
+					else 
+					{ 
+						isColliding = false;
+					}
 				}
 
 				if (isColliding)
 				{
 					std::cout << "Collision FLAG! \n";
 
-					Grid* tempGrid = new Grid(500);
-
-					randomFruit = tempGrid->randomGridPosition();
+					randomFruit = grid->randomGridPosition();
 					newFruitPos[0] = randomFruit[0];
-					newFruitPos[0] = randomFruit[1];
+					newFruitPos[1] = randomFruit[1];
+
 
 					checkingCollision = true;
 				}
 				else { checkingCollision = false; }
 			}
-			*/
+			
 
 			fruit->SetFruitPosition(newFruitPos[0], newFruitPos[1]);
 			player->AddScore();
